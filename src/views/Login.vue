@@ -11,6 +11,7 @@
               id="email"
               class="text-box"
               placeholder="Email"
+              required
             />
           </b-row>
           <b-row align-h="center">
@@ -20,6 +21,7 @@
               id="password"
               class="text-box"
               placeholder="Password"
+              required
             />
           </b-row>
           <b-button type="submit" class="mt-3 px-5">Login</b-button>

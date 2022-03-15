@@ -16,6 +16,7 @@
               v-model="form.email"
               class="text-box"
               placeholder="Email"
+              required
             />
           </b-row>
           <b-row align-h="center" class="mb-2">
@@ -24,6 +25,7 @@
               v-model="form.password"
               class="text-box"
               placeholder="Password"
+              required
             />
           </b-row>
           <b-row align-h="center" class="mb-2">
@@ -32,6 +34,7 @@
               v-model="form.name"
               class="text-box"
               placeholder="Name"
+              required
             />
           </b-row>
           <b-row align-h="center" class="mb-2">
@@ -40,6 +43,7 @@
               v-model="form.companyName"
               class="text-box"
               placeholder="Company"
+              required
             />
           </b-row>
           <b-row align-h="center">
@@ -48,10 +52,14 @@
               v-model="form.companyReg"
               class="text-box"
               placeholder="Company Register Number"
+              required
             />
           </b-row>
           <b-button type="submit" class="mt-3 px-5">Get Start</b-button>
         </form>
+        <p class="mt-3 pointer" @click="$router.push('/login')">
+          Already have an account
+        </p>
       </b-col>
     </b-row>
   </b-container>
