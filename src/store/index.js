@@ -55,12 +55,10 @@ export default new Vuex.Store({
         .auth()
         .signInWithEmailAndPassword(form.email, form.password)
         .then(async () => {
-          console.log("logining in");
           await dispatch("getUserInfo", form.email);
           router.push("/dashboard");
         })
         .catch((err) => {
-          console.log(err.message);
           alert(err.message);
         });
     },
@@ -79,26 +77,23 @@ export default new Vuex.Store({
           dispatch("login", form);
         })
         .catch((err) => {
-          console.log(err.message);
+          alert(err.message)
           return false;
         });
     },
     async createItem({ dispatch, getters }, form) {
-      console.log("form -->", form);
       form.uid = await getters.getUser.id;
       await itemsCollection.add(form);
       dispatch("getUserItems", form.uid);
     },
     async getItemInfo({ commit }, id) {
       const item = await itemsCollection.doc(id).get();
-      console.log(item.exists);
       commit("SET_ITEM", item.data());
     },
     async getUserInfo({ commit }, email) {
       const user = await usersCollection.where("email", "==", email).get();
       let users = [];
       user.forEach((doc) => users.push({ doc_id: doc.id, ...doc.data() }));
-      console.log("userInfo --> ", users[0]);
       commit("SET_USER", users[0]);
     },
     async getUserItems({ commit, getters }) {
@@ -109,13 +104,11 @@ export default new Vuex.Store({
       commit("SET_ITEMS", items);
     },
     async updateItem({ dispatch, getters }, form) {
-      console.log("form -->", form);
       itemsCollection.doc(form.id).update(form);
       const uid = await getters.getUser.uid;
       dispatch("getUserItems", uid);
     },
     async updateUser({ dispatch }, form) {
-      console.log("form -->", form);
       usersCollection.doc(form.doc_id).update(form);
       dispatch("getUserInfo", form.email);
     },
