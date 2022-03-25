@@ -70,22 +70,9 @@
         <form @submit.prevent="submit">
           <label for="productName">Product name</label>
           <b-form-input id="productName" v-model="form.productName" />
-          <label for="machineId">Machine ID</label>
-          <b-form-input id="machineId" v-model="form.machineId" />
           <label for="ingredients">Ingredients(s)</label>
           <b-form-input id="ingredients" v-model="form.ingredients" />
           <label for="manufactDate">Manufacturing date</label>
-          <b-form-datepicker
-            id="manufactDate"
-            v-model="form.manufactDate"
-            type="date"
-          />
-          <label for="expireDate">Expiration date</label>
-          <b-form-datepicker
-            id="expireDate"
-            v-model="form.expireDate"
-            type="date"
-          />
           <label for="storage">Storage</label>
           <b-form-input id="storage" v-model="form.storage" />
           <label for="suggestion">Suggestion(s)</label>
@@ -166,7 +153,7 @@ export default {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-          alert(error.message)
+          alert(error.message);
         },
         () => {
           this.uploadValue = 100;

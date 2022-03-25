@@ -6,6 +6,7 @@ import Dashboard from "../views/Dashboard";
 import AboutUs from "../views/AboutUs";
 import Info from "../views/Info";
 import Profile from "../views/Profile";
+import Scan from "../views/Scan";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/info/:id",
     name: "Info",
     component: Info,
+  },
+  {
+    path: "/info/:id/:lot",
+    name: "Lot",
+    component: Scan,
   },
   {
     path: "/profile",

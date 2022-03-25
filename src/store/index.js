@@ -26,12 +26,15 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const usersCollection = db.collection("users");
 const itemsCollection = db.collection("items");
+const lotsCollection = db.collection("lots");
 
 export default new Vuex.Store({
   state: {
     user: {},
     items: [],
     item: {},
+    lots: [],
+    lot: {},
   },
   mutations: {
     SET_USER(state, payload) {
@@ -43,11 +46,19 @@ export default new Vuex.Store({
     SET_ITEM(state, payload) {
       state.item = payload;
     },
+    SET_LOTS(state, payload) {
+      state.lots = payload;
+    },
+    SET_LOT(state, payload) {
+      state.lot = payload;
+    },
   },
   getters: {
     getUser: (state) => state.user,
     getItems: (state) => state.items,
     getItem: (state) => state.item,
+    getLots: (state) => state.lots,
+    getLot: (state) => state.lot,
   },
   actions: {
     login({ dispatch }, form) {
@@ -77,7 +88,7 @@ export default new Vuex.Store({
           dispatch("login", form);
         })
         .catch((err) => {
-          alert(err.message)
+          alert(err.message);
           return false;
         });
     },
@@ -86,9 +97,27 @@ export default new Vuex.Store({
       await itemsCollection.add(form);
       dispatch("getUserItems", form.uid);
     },
-    async getItemInfo({ commit }, id) {
+    async createLot({ dispatch, getters }, form) {
+      form.uid = await getters.getItem.uid;
+      await lotsCollection.add(form);
+      dispatch("getLots");
+    },
+    async getItemInfo({ commit, dispatch }, id) {
       const item = await itemsCollection.doc(id).get();
       commit("SET_ITEM", item.data());
+      dispatch("getLots");
+    },
+    async getLotInfo({ commit }, id) {
+      const item = await lotsCollection.doc(id).get();
+      commit("SET_LOT", item.data());
+    },
+    async getLots({ commit, getters }) {
+      const id = await getters.getItem.uid;
+      const getLots = await lotsCollection.where("uid", "==", id).get();
+      const lots = [];
+      getLots.forEach((doc) => lots.push({ id: doc.id, ...doc.data() }));
+      console.log("lots", lots);
+      commit("SET_LOTS", lots);
     },
     async getUserInfo({ commit }, email) {
       const user = await usersCollection.where("email", "==", email).get();
@@ -116,6 +145,10 @@ export default new Vuex.Store({
       itemsCollection.doc(id).delete();
       const uid = await getters.getUser.uid;
       dispatch("getUserItems", uid);
+    },
+    async deleteLots({ dispatch }, id) {
+      lotsCollection.doc(id).delete();
+      dispatch("getLots");
     },
   },
 });
