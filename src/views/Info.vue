@@ -60,7 +60,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { toPng } from "html-to-image";
+import { toSvg } from "html-to-image";
 import QrcodeVue from "qrcode.vue";
 import download from "downloadjs";
 
@@ -98,8 +98,8 @@ export default {
     ...mapActions(["getItemInfo", "createLot", "getLots", "deleteLots"]),
     downloadImage(id) {
       this.value = window.location.href + "/" + id;
-      toPng(document.getElementById("qrcode")).then(function (dataUrl) {
-        download(dataUrl, "qrcode.png");
+      toSvg(document.getElementById("qrcode")).then(function (dataUrl) {
+        download(dataUrl, "qrcode.svg");
       });
     },
     async submit() {
