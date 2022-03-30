@@ -8,7 +8,7 @@
       <p @click="$router.push('/aboutUs')" class="text-start pointer">
         About Us
       </p>
-      <p class="text-start pointer"><b>My profile</b></p>
+      <p class="text-start pointer"><b>Update Profile</b></p>
       <p @click="$router.push('/login')" class="text-start pointer">Logout</p>
     </b-col>
     <b-col cols="2" class="px-4"> </b-col>
@@ -27,7 +27,7 @@
           <b-form-input id="phone" v-model="form.phone" />
           <label for="address">Address</label>
           <b-form-input id="address" v-model="form.address" />
-          <b-button type="submit" class="btn btn-primary mt-4"> Edit </b-button>
+          <b-button type="submit" class="btn btn-primary mt-4"> Save </b-button>
         </form>
       </b-row>
     </b-col>

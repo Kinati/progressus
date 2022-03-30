@@ -7,7 +7,7 @@
       </p>
       <p class="text-start"><b>About Us</b></p>
       <p class="text-start pointer" @click="$router.push('/profile')">
-        My profile
+        Update Profile
       </p>
       <p @click="$router.push('/login')" class="text-start pointer">Logout</p>
     </b-col>
@@ -26,6 +26,7 @@
         consumer to track your food production process and origin. And can
         report problem to producer easily via Line Chatbot
       </p>
+      <p>Please contact us at hello@aw1.com</p>
     </b-col>
   </b-row>
 </template>

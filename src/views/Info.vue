@@ -51,7 +51,7 @@
           required
         />
         <b-button type="submit" class="btn btn-primary mt-4">{{
-          isEdit ? "Edit" : "Add item"
+          isEdit ? "Save" : "Add item"
         }}</b-button>
       </form>
     </b-modal>

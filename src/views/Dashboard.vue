@@ -7,13 +7,13 @@
         About Us
       </p>
       <p class="text-start pointer" @click="$router.push('/profile')">
-        My profile
+        Update Profile
       </p>
       <p @click="$router.push('/login')" class="text-start pointer">Logout</p>
     </b-col>
     <b-col cols="2"> </b-col>
     <b-col cols="10" class="py-5 body" align-self="end">
-      <h1 class="text-xl">Welcome {{ user.email }}</h1>
+      <h1 class="text-xl">Welcome {{ user.firstName }} {{ user.lastName }}</h1>
 
       <b-row class="pb-5 px-2 w-100">
         <b-col
@@ -86,7 +86,7 @@
             ></b-form-file>
           </b-form-group>
           <b-button type="submit" class="btn btn-primary mt-4">{{
-            isEdit ? "Edit" : "Add item"
+            isEdit ? "Save" : "Add item"
           }}</b-button>
         </form>
       </b-modal>
