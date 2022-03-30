@@ -69,18 +69,21 @@
         <h1>{{ isEdit ? "Edit Item" : "Add Item" }}</h1>
         <form @submit.prevent="submit">
           <label for="productName">Product name</label>
-          <b-form-input id="productName" v-model="form.productName" />
+          <b-form-input id="productName" v-model="form.productName" required />
           <label for="ingredients">Ingredients(s)</label>
-          <b-form-input id="ingredients" v-model="form.ingredients" />
-          <label for="manufactDate">Manufacturing date</label>
+          <b-form-input id="ingredients" v-model="form.ingredients" required />
           <label for="storage">Storage</label>
-          <b-form-input id="storage" v-model="form.storage" />
+          <b-form-input id="storage" v-model="form.storage" required />
           <label for="suggestion">Suggestion(s)</label>
           <b-form-input id="suggestion" v-model="form.suggestion" />
           <label for="caution">Caution(s)</label>
           <b-form-input id="caution" v-model="form.caution" />
           <b-form-group label="Image:" class="mt-3" label-cols-sm="2">
-            <b-form-file id="file-default" @change="onUpload"></b-form-file>
+            <b-form-file
+              id="file-default"
+              @change="onUpload"
+              required
+            ></b-form-file>
           </b-form-group>
           <b-button type="submit" class="btn btn-primary mt-4">{{
             isEdit ? "Edit" : "Add item"
@@ -169,6 +172,7 @@ export default {
     async submit() {
       if (this.isEdit) {
         await this.updateItem(this.form);
+        alert("Product has been updated successfully");
         this.addModal = false;
       } else {
         await this.$store.dispatch("createItem", this.form);

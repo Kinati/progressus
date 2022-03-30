@@ -17,12 +17,16 @@
 
       <b-row class="pb-5 w-100" align-h="center">
         <form class="w-50" @submit.prevent="submit">
-          <label for="productName">Name</label>
-          <b-form-input id="productName" v-model="form.name" />
-          <label for="machineId">Company Name</label>
-          <b-form-input id="machineId" v-model="form.companyName" />
+          <label for="productName">First name</label>
+          <b-form-input id="productName" v-model="form.firstName" />
+          <label for="machineId">Last Name</label>
+          <b-form-input id="machineId" v-model="form.lastName" />
           <label for="ingredients">Company Register Number</label>
           <b-form-input id="ingredients" v-model="form.companyReg" />
+          <label for="phone">Phone</label>
+          <b-form-input id="phone" v-model="form.phone" />
+          <label for="address">Address</label>
+          <b-form-input id="address" v-model="form.address" />
           <b-button type="submit" class="btn btn-primary mt-4"> Edit </b-button>
         </form>
       </b-row>
@@ -44,8 +48,9 @@ export default {
   },
   methods: {
     ...mapActions(["updateUser"]),
-    submit() {
-      this.updateUser(this.form);
+    async submit() {
+      await this.updateUser(this.form);
+      alert("Your Profile has been updated");
     },
   },
   computed: {

@@ -81,7 +81,10 @@ export default new Vuex.Store({
           usersCollection.add({
             email: res.email,
             id: res.uid,
-            name: form.name,
+            firstName: form.firstName,
+            lastName: form.lastName,
+            phone: form.phone,
+            address: form.address,
             companyName: form.companyName,
             companyReg: form.companyReg,
           });

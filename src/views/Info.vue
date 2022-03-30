@@ -35,18 +35,20 @@
       <h1>{{ isEdit ? "Edit Item" : "Add Item" }}</h1>
       <form @submit.prevent="submit">
         <label for="machineId">Machine ID</label>
-        <b-form-input id="machineId" v-model="form.machineId" />
+        <b-form-input id="machineId" v-model="form.machineId" required />
         <label for="manufactDate">Manufacturing date</label>
         <b-form-datepicker
           id="manufactDate"
           v-model="form.manufactDate"
           type="date"
+          required
         />
         <label for="expireDate">Expiration date</label>
         <b-form-datepicker
           id="expireDate"
           v-model="form.expireDate"
           type="date"
+          required
         />
         <b-button type="submit" class="btn btn-primary mt-4">{{
           isEdit ? "Edit" : "Add item"

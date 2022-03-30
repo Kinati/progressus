@@ -31,9 +31,36 @@
           <b-row align-h="center" class="mb-2">
             <b-input
               type="text"
-              v-model="form.name"
+              v-model="form.firstName"
               class="text-box"
-              placeholder="Name"
+              placeholder="First name"
+              required
+            />
+          </b-row>
+          <b-row align-h="center" class="mb-2">
+            <b-input
+              type="text"
+              v-model="form.lastName"
+              class="text-box"
+              placeholder="Last name"
+              required
+            />
+          </b-row>
+          <b-row align-h="center" class="mb-2">
+            <b-input
+              type="tel"
+              v-model="form.phone"
+              class="text-box"
+              placeholder="Phone"
+              required
+            />
+          </b-row>
+          <b-row align-h="center" class="mb-2">
+            <b-input
+              type="text"
+              v-model="form.address"
+              class="text-box"
+              placeholder="Address"
               required
             />
           </b-row>
@@ -71,11 +98,14 @@ export default {
   data() {
     return {
       form: {
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         companyName: "",
         companyReg: "",
+        phone: "",
+        address: "",
       },
       error: null,
     };
