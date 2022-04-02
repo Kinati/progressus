@@ -1,8 +1,7 @@
 <template>
   <b-container class="py-5">
     <b-row align-h="center" class="w-100">
-      <b-img class="productImage mx-2" height="150" :src="item.img" />
-      <qrcode-vue id="qrcode" :value="value" :size="size" level="H" />
+      <b-img class="productImage" height="150" :src="item.img" />
     </b-row>
 
     <label for="productName">Product name</label>
@@ -31,6 +30,22 @@
       type="date"
       readonly
     />
+    <b-button size="sm" v-b-modal="'my-modal'" class="mt-3"> Report </b-button>
+    <b-modal id="my-modal" hide-footer hide-header centered @hide="hide">
+      <form @submit.prevent="submit">
+        <label for="contact">Reporter Contact</label>
+        <b-form-input v-model="form.contact" id="contact" required />
+        <label for="detail">Details</label>
+        <b-form-textarea
+          id="detail"
+          v-model="form.detail"
+          placeholder="Report Deatil"
+          rows="4"
+          required
+        />
+        <b-button type="submit" class="btn btn-primary mt-4">Report</b-button>
+      </form>
+    </b-modal>
   </b-container>
 </template>
 
@@ -40,14 +55,35 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      value: window.location.href,
       size: 120,
       download: "",
       lotInfo: "",
+      modal: false,
+      form: {
+        contact: "",
+        productName: "",
+        lotId: "",
+        email: "",
+        detail: "",
+      },
     };
   },
   methods: {
-    ...mapActions(["getItemInfo", "getLotInfo"]),
+    ...mapActions(["getItemInfo", "getLotInfo", "createReports"]),
+    async submit() {
+      this.form.productName = this.item.productName;
+      this.form.lotId = this.$route.params.lot;
+      this.form.email = this.item.email;
+      console.log(this.$route.params.lot);
+
+      await this.createReports(this.form);
+      alert("Your Report has been sent");
+      this.$bvModal.hide("my-modal");
+    },
+    hide() {
+      this.form.email = "";
+      this.form.detail = "";
+    },
   },
 
   computed: {

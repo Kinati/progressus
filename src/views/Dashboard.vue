@@ -3,6 +3,7 @@
     <b-col class="sidebar py-5 px-4" cols="2">
       <h1 class="text-xl mb-5">Progressus</h1>
       <p class="text-start"><b>Dashboard</b></p>
+      <p @click="$router.push('/report')" class="text-start pointer">Report</p>
       <p @click="$router.push('/aboutUs')" class="text-start pointer">
         About Us
       </p>

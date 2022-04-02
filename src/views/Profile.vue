@@ -5,6 +5,7 @@
       <p class="text-start pointer" @click="$router.push('/dashboard')">
         Dashboard
       </p>
+      <p @click="$router.push('/report')" class="text-start pointer">Report</p>
       <p @click="$router.push('/aboutUs')" class="text-start pointer">
         About Us
       </p>

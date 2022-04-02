@@ -5,8 +5,10 @@
       <p class="text-start pointer" @click="$router.push('/dashboard')">
         Dashboard
       </p>
-      <p @click="$router.push('/report')" class="text-start pointer">Report</p>
-      <p class="text-start"><b>About Us</b></p>
+      <p class="text-start"><b>Report</b></p>
+      <p @click="$router.push('/aboutUs')" class="text-start pointer">
+        About Us
+      </p>
       <p class="text-start pointer" @click="$router.push('/profile')">
         Update Profile
       </p>
@@ -14,26 +16,39 @@
     </b-col>
     <b-col cols="2"> </b-col>
     <b-col cols="10" class="py-5 body px-4" align-self="end">
-      <h1 class="text-xl mb-4">About Us</h1>
-
-      <p>
-        We are product traceability system that allows producer keep records of
-        their products, streamline inventory management, continually improve
-        their products, make the products more quality, and increase the
-        reliability of their products, giving the company more credibility and
-        reputation.
-      </p>
-      <p>
-        consumer to track your food production process and origin. And can
-        report problem to producer easily via Line Chatbot
-      </p>
-      <p>Please contact us at hello@aw1.com</p>
+      <h1 class="text-xl mb-4">Reports</h1>
+      <b-table hover :items="items"></b-table>
     </b-col>
   </b-row>
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      items: [],
+    };
+  },
+  methods: {
+    ...mapActions(["getReportInfo"]),
+  },
+  computed: {
+    ...mapGetters({ reports: "getReports" }),
+  },
+  mounted() {
+    this.getReportInfo();
+    this.reports.map((row) => {
+      this.items.push({
+        productName: row.productName,
+        lotId: row.lotId,
+        contact: row.contact,
+        reportDetail: row.detail,
+      });
+    });
+  },
+};
 </script>
 
 <style  scoped>

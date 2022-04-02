@@ -7,6 +7,7 @@ import AboutUs from "../views/AboutUs";
 import Info from "../views/Info";
 import Profile from "../views/Profile";
 import Scan from "../views/Scan";
+import Report from "../views/Report";
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+  },
+  {
+    path: "/report",
+    name: "Report",
+    component: Report,
   },
   {
     path: "/login",

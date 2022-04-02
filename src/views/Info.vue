@@ -79,6 +79,7 @@ export default {
         manufactDate: "",
       },
       fields: [
+        "id",
         "machineId",
         "expireDate",
         "machineId",
@@ -86,6 +87,7 @@ export default {
       ],
       items: [
         {
+          id: "",
           expireDate: "",
           machineId: "",
           manufactDate: "",

@@ -27,6 +27,7 @@ const db = firebaseApp.firestore();
 const usersCollection = db.collection("users");
 const itemsCollection = db.collection("items");
 const lotsCollection = db.collection("lots");
+const reportsCollection = db.collection("reports");
 
 export default new Vuex.Store({
   state: {
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     item: {},
     lots: [],
     lot: {},
+    reports: [],
   },
   mutations: {
     SET_USER(state, payload) {
@@ -52,6 +54,9 @@ export default new Vuex.Store({
     SET_LOT(state, payload) {
       state.lot = payload;
     },
+    SET_REPORTS(state, payload) {
+      state.reports = payload;
+    },
   },
   getters: {
     getUser: (state) => state.user,
@@ -59,6 +64,7 @@ export default new Vuex.Store({
     getItem: (state) => state.item,
     getLots: (state) => state.lots,
     getLot: (state) => state.lot,
+    getReports: (state) => state.reports,
   },
   actions: {
     login({ dispatch }, form) {
@@ -101,13 +107,19 @@ export default new Vuex.Store({
       dispatch("getUserItems", form.uid);
     },
     async createLot({ dispatch, getters }, form) {
-      form.uid = await getters.getItem.uid;
+      form.uid = await getters.getItem.id;
       await lotsCollection.add(form);
+      dispatch("getLots");
+    },
+    async createReports({ dispatch }, form) {
+      await reportsCollection.add(form);
       dispatch("getLots");
     },
     async getItemInfo({ commit, dispatch }, id) {
       const item = await itemsCollection.doc(id).get();
-      commit("SET_ITEM", item.data());
+      let result = item.data();
+      result.id = id;
+      commit("SET_ITEM", result);
       dispatch("getLots");
     },
     async getLotInfo({ commit }, id) {
@@ -115,12 +127,19 @@ export default new Vuex.Store({
       commit("SET_LOT", item.data());
     },
     async getLots({ commit, getters }) {
-      const id = await getters.getItem.uid;
+      const id = await getters.getItem.id;
       const getLots = await lotsCollection.where("uid", "==", id).get();
       const lots = [];
       getLots.forEach((doc) => lots.push({ id: doc.id, ...doc.data() }));
       console.log("lots", lots);
       commit("SET_LOTS", lots);
+    },
+    async getReportInfo({ commit, getters }) {
+      const email = await getters.getUser.email;
+      const report = await reportsCollection.where("email", "==", email).get();
+      let reports = [];
+      report.forEach((doc) => reports.push({ doc_id: doc.id, ...doc.data() }));
+      commit("SET_REPORTS", reports);
     },
     async getUserInfo({ commit }, email) {
       const user = await usersCollection.where("email", "==", email).get();
