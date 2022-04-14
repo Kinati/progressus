@@ -115,6 +115,12 @@ export default new Vuex.Store({
       await reportsCollection.add(form);
       dispatch("getLots");
     },
+    async getItems({ commit }) {
+      const getItems = await itemsCollection.get();
+      const items = [];
+      getItems.forEach((doc) => items.push({ id: doc.id, ...doc.data() }));
+      commit("SET_ITEMS", items);
+    },
     async getItemInfo({ commit, dispatch }, id) {
       const item = await itemsCollection.doc(id).get();
       let result = item.data();
@@ -131,7 +137,6 @@ export default new Vuex.Store({
       const getLots = await lotsCollection.where("uid", "==", id).get();
       const lots = [];
       getLots.forEach((doc) => lots.push({ id: doc.id, ...doc.data() }));
-      console.log("lots", lots);
       commit("SET_LOTS", lots);
     },
     async getReportInfo({ commit, getters }) {

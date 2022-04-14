@@ -8,6 +8,7 @@ import Info from "../views/Info";
 import Profile from "../views/Profile";
 import Scan from "../views/Scan";
 import Report from "../views/Report";
+import Products from "../views/Products";
 
 Vue.use(VueRouter);
 
@@ -52,6 +53,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/products",
+    name: "Products",
+    component: Products,
   },
 ];
 
