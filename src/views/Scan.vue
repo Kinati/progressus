@@ -14,22 +14,24 @@
     <b-form-input id="suggestion" v-model="item.suggestion" readonly />
     <label for="caution">Caution(s)</label>
     <b-form-input id="caution" v-model="item.caution" readonly />
-    <label for="machineId">Machine ID</label>
-    <b-form-input id="machineId" v-model="lot.machineId" readonly />
-    <label for="manufactDate">Manufacturing date</label>
-    <b-form-datepicker
-      id="manufactDate"
-      v-model="lot.manufactDate"
-      type="date"
-      readonly
-    />
-    <label for="expireDate">Expiration date</label>
-    <b-form-datepicker
-      id="expireDate"
-      v-model="lot.expireDate"
-      type="date"
-      readonly
-    />
+    <div v-if="this.$route.params.lot">
+      <label for="machineId">Machine ID</label>
+      <b-form-input id="machineId" v-model="lot.machineId" readonly />
+      <label for="manufactDate">Manufacturing date</label>
+      <b-form-datepicker
+        id="manufactDate"
+        v-model="lot.manufactDate"
+        type="date"
+        readonly
+      />
+      <label for="expireDate">Expiration date</label>
+      <b-form-datepicker
+        id="expireDate"
+        v-model="lot.expireDate"
+        type="date"
+        readonly
+      />
+    </div>
     <b-button size="sm" v-b-modal="'my-modal'" class="mt-3"> Report </b-button>
     <b-modal id="my-modal" hide-footer hide-header centered @hide="hide">
       <form @submit.prevent="submit">

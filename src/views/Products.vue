@@ -51,6 +51,9 @@ export default {
       await this.getItems();
       this.displayItems = this.items;
     },
+    goToInfo(id) {
+      this.$router.push({ name: "Product", params: { id: id } });
+    },
   },
   computed: {
     ...mapGetters({ items: "getItems" }),

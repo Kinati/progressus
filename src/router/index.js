@@ -59,6 +59,11 @@ const routes = [
     name: "Products",
     component: Products,
   },
+  {
+    path: "/product/:id",
+    name: "Product",
+    component: Scan,
+  },
 ];
 
 const router = new VueRouter({
