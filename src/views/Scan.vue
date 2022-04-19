@@ -31,8 +31,10 @@
         type="date"
         readonly
       />
+      <b-button size="sm" v-b-modal="'my-modal'" class="mt-3">
+        Report
+      </b-button>
     </div>
-    <b-button size="sm" v-b-modal="'my-modal'" class="mt-3"> Report </b-button>
     <b-modal id="my-modal" hide-footer hide-header centered @hide="hide">
       <form @submit.prevent="submit">
         <label for="contact">Reporter Contact</label>
