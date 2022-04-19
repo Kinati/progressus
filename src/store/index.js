@@ -103,6 +103,7 @@ export default new Vuex.Store({
     },
     async createItem({ dispatch, getters }, form) {
       form.uid = await getters.getUser.id;
+      form.email = await getters.getUser.email;
       await itemsCollection.add(form);
       dispatch("getUserItems", form.uid);
     },
