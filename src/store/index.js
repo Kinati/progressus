@@ -161,6 +161,7 @@ export default new Vuex.Store({
       commit("SET_ITEMS", items);
     },
     async updateItem({ dispatch, getters }, form) {
+      form.email = await getters.getUser.email;
       itemsCollection.doc(form.id).update(form);
       const uid = await getters.getUser.uid;
       dispatch("getUserItems", uid);
